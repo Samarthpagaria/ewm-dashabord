@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<!-- saved from url=(0241)http://127.0.0.1:3000/c:/Users/HP/AppData/Local/Packages/5319275A.WhatsAppDesktop_cv1g1gvanyjgm/LocalState/sessions/DBB8686108041BD1D6DE57977971F8568A2C4346/transfers/2026-41/LEED_Score_Calculator_Modern_UI%20(1).html?vscode-livepreview=true -->
+<html lang="en" style="--wh-aurora-intensity: 0.7; --wh-aurora-image-intensity: 0.2; --wh-font-size-factor: 1;"><script src="chrome-extension://eppiocemhmnlbhjplcgkofciiegomcon/content/location/location.js" id="eppiocemhmnlbhjplcgkofciiegomcon"></script><script src="chrome-extension://eppiocemhmnlbhjplcgkofciiegomcon/libs/extend-native-history-api.js"></script><script src="chrome-extension://eppiocemhmnlbhjplcgkofciiegomcon/libs/requests.js"></script><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script type="text/javascript" src="./LEED v5 Building Score Calculator(25102C2008_SamarthPagaria)_files/___vscode_livepreview_injected_script"></script><script bis_use="true" type="text/javascript" charset="utf-8" nonce="" data-dynamic-id="d3e4b843-1396-451a-b30b-674587d8e1c2" src="chrome-extension://eppiocemhmnlbhjplcgkofciiegomcon/executors/200.js"></script><script bis_use="true" type="text/javascript" charset="utf-8" nonce="" data-dynamic-id="d3e4b843-1396-451a-b30b-674587d8e1c2" src="chrome-extension://eppiocemhmnlbhjplcgkofciiegomcon/executors/101.js"></script>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LEED v5 Building Score Calculator</title>
+<link href="./LEED v5 Building Score Calculator(25102C2008_SamarthPagaria)_files/css2" rel="stylesheet">
+<style>
+:root{
+  --bg: #090e0c;
+  --surface: #121c18;
+  --surface-hover: #172420;
+  --border: #1f332c;
+  --border-focus: #10b981;
+  --text: #ecfdf5;
+  --text-muted: #94a3b8;
+  --primary: #10b981;
+  --primary-hover: #059669;
+  --primary-glow: rgba(16, 185, 129, 0.15);
+  --accent-gradient: linear-gradient(135deg, #059669 0%, #10b981 50%, #34d399 100%);
+  --shadow: 0 20px 40px -15px rgba(0,0,0,0.5);
+  --radius: 16px;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:'Plus Jakarta Sans',sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  background-image: 
+    radial-gradient(circle at 15% 10%, rgba(16, 185, 129, 0.08) 0%, transparent 40%),
+    radial-gradient(circle at 85% 90%, rgba(5, 150, 105, 0.06) 0%, transparent 40%);
+  background-attachment: fixed;
+}
+
+header{
+  padding: 60px 20px 40px;
+  text-align: center;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.header-badge{
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  border-radius: 99px;
+  color: var(--primary);
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+header h1{
+  margin: 0 0 12px;
+  font-size: clamp(32px, 5vw, 48px);
+  font-weight: 800;
+  letter-spacing: -1.5px;
+  background: linear-gradient(180deg, #ffffff 0%, #a7f3d0 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+header p{
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 16px;
+}
+
+main{
+  max-width: 1100px;
+  margin: 0 auto 60px;
+  padding: 0 20px;
+  display: grid;
+  gap: 24px;
+}
+
+.card{
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px;
+  box-shadow: var(--shadow);
+  transition: border-color 0.2s ease;
+}
+.card:hover{
+  border-color: rgba(31, 51, 44, 1);
+}
+
+h2{
+  margin: 0 0 20px;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+h2 span{
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  color: var(--primary);
+  background: rgba(16, 185, 129, 0.1);
+  padding: 2px 8px;
+  border-radius: 6px;
+}
+
+.grid{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+label{
+  font-weight: 600;
+  font-size: 13px;
+  display: block;
+  margin-bottom: 8px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+input[type=text], input[type=number]{
+  width: 100%;
+  padding: 14px 16px;
+  background: rgba(9, 14, 12, 0.6);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  font-size: 15px;
+  font-family: inherit;
+  color: var(--text);
+  outline: none;
+  transition: all 0.2s ease;
+}
+input[type=text]:focus, input[type=number]:focus{
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 4px var(--primary-glow);
+  background: rgba(9, 14, 12, 0.9);
+}
+
+.warning{
+  background: rgba(245, 158, 11, 0.08);
+  border: 1px solid rgba(245, 158, 11, 0.2);
+  padding: 16px 20px;
+  border-radius: 12px;
+  font-size: 14px;
+  color: #fcd34d;
+  margin-bottom: 24px;
+  line-height: 1.5;
+}
+
+.table-wrapper{
+  overflow-x: auto;
+}
+table{
+  width: 100%;
+  border-collapse: collapse;
+  white-space: nowrap;
+}
+th, td{
+  padding: 14px 16px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+  vertical-align: middle;
+}
+th{
+  background: rgba(9, 14, 12, 0.4);
+  color: var(--text-muted);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 700;
+}
+tbody tr{
+  transition: background 0.15s ease;
+}
+tbody tr:hover{
+  background: var(--surface-hover);
+}
+tbody tr:last-child td{
+  border-bottom: 0;
+}
+.score-input{
+  max-width: 90px;
+  padding: 10px 12px !important;
+  text-align: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+}
+
+.badge{
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 99px;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+}
+.certified{background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3);}
+.silver{background: rgba(148, 163, 184, 0.15); color: #cbd5e1; border: 1px solid rgba(148, 163, 184, 0.3);}
+.gold{background: rgba(245, 158, 11, 0.15); color: #fcd34d; border: 1px solid rgba(245, 158, 11, 0.3);}
+.platinum{background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3);}
+.none{background: rgba(239, 68, 68, 0.15); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.3);}
+
+.bigscore{
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 56px;
+  font-weight: 800;
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  line-height: 1.1;
+  letter-spacing: -2px;
+}
+
+.progress{
+  height: 8px;
+  background: rgba(9, 14, 12, 0.8);
+  border-radius: 99px;
+  overflow: hidden;
+  margin: 12px 0 0;
+  border: 1px solid var(--border);
+}
+.progress>div{
+  height: 100%;
+  background: var(--accent-gradient);
+  border-radius: inherit;
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.status{
+  padding: 18px 20px;
+  border-radius: 12px;
+  line-height: 1.6;
+  font-size: 14px;
+}
+.status.green{background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.25); color: #a7f3d0;}
+.status.red{background: rgba(239, 68, 68, 0.08); border: 1px solid rgba(239, 68, 68, 0.25); color: #fecaca;}
+
+.actions{
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.btn{
+  border: 0;
+  border-radius: 12px;
+  padding: 14px 24px;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.btn:hover{
+  transform: translateY(-2px);
+  filter: brightness(1.1);
+}
+.primary{
+  background: var(--accent-gradient);
+  color: #090e0c;
+  box-shadow: 0 4px 20px rgba(16, 185, 129, 0.3);
+}
+.secondary{
+  background: var(--surface-hover);
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+.secondary:hover{
+  border-color: var(--text-muted);
+}
+
+#checks{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 12px;
+}
+#checks>div{
+  padding: 14px 16px;
+  background: rgba(9, 14, 12, 0.4);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+}
+#checks label{
+  margin: 0;
+  font-weight: 500;
+  color: var(--text);
+  text-transform: none;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+#checks input[type=checkbox]{
+  accent-color: var(--primary);
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#breakdown{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+}
+.breakdown-card{
+  background: rgba(9, 14, 12, 0.4);
+  border: 1px solid var(--border);
+  padding: 16px;
+  border-radius: 12px;
+}
+.breakdown-header{
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+.breakdown-header span:last-child{
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--primary);
+}
+
+.footer{
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.6;
+  text-align: center;
+  padding: 10px 0;
+}
+</style>
+<style id="dark-reader-style" type="text/css">@media screen {
+html {-webkit-transition : -webkit-filter 300ms linear;}
+}</style><style id="highlight-mengshou-style">
+    .highlight-mengshou-wrap {
+        background: #ff9;
+        cursor: pointer;
+    }
+    .highlight-mengshou-wrap.active {
+        background: #ffb;
+    }
+</style></head>
+<body __processed_1dd8713a-de3e-495c-b5c2-19997a68c50b__="true" bis_register="W3sibWFzdGVyIjp0cnVlLCJleHRlbnNpb25JZCI6ImVwcGlvY2VtaG1ubGJoanBsY2drb2ZjaWllZ29tY29uIiwiYWRibG9ja2VyU3RhdHVzIjp7IkRJU1BMQVkiOiJlbmFibGVkIiwiRkFDRUJPT0siOiJlbmFibGVkIiwiVFdJVFRFUiI6ImVuYWJsZWQiLCJSRURESVQiOiJlbmFibGVkIiwiUElOVEVSRVNUIjoiZW5hYmxlZCIsIklOU1RBR1JBTSI6ImVuYWJsZWQiLCJUSUtUT0siOiJkaXNhYmxlZCIsIkxJTktFRElOIjoiZW5hYmxlZCIsIkNPTkZJRyI6ImRpc2FibGVkIn0sInZlcnNpb24iOiIyLjMuMCIsInNjb3JlIjoyMDMwMDB9XQ==">
+
+<header>
+  <div class="header-badge" bis_skin_checked="1">BD+C • New Construction</div>
+  <h1>LEED v5 Building Score Calculator</h1>
+  <p>Interactive evaluation dashboard mapped to the updated 110-point framework</p>
+</header>
+
+<main>
+  <section class="card">
+    <h2><span>01</span> Building Profile</h2>
+    <div class="grid" bis_skin_checked="1">
+      <div bis_skin_checked="1">
+        <label>Building Name</label>
+        <input id="building" type="text" placeholder="e.g. Vidyalankar Institute of Technology">
+      </div>
+      <div bis_skin_checked="1">
+        <label>Location</label>
+        <input id="location" type="text" placeholder="e.g. Mumbai, India">
+      </div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2><span>02</span> Points Allocation</h2>
+    <div class="warning" bis_skin_checked="1">
+      Enter the <b>actual points earned</b> per category. Category maximums reflect the LEED v5 framework rules.
+    </div>
+    <div class="table-wrapper" bis_skin_checked="1">
+      <table>
+        <thead>
+          <tr>
+            <th>Code</th>
+            <th>LEED v5 Category</th>
+            <th>Maximum</th>
+            <th>Points Earned</th>
+            <th>Remaining</th>
+          </tr>
+        </thead>
+        <tbody id="categories"><tr><td><code style="color:var(--primary); font-weight:700;">IP</code></td>
+  <td><b>Integrative Process, Planning &amp; Assessments</b></td><td>1</td>
+  <td><input class="score-input" type="number" min="0" max="1" step="0.5" value="0" id="p_IP" oninput="calculate()"></td>
+  <td id="r_IP" style="font-family:'JetBrains Mono',monospace; color:var(--text-muted);">1</td></tr><tr><td><code style="color:var(--primary); font-weight:700;">LT</code></td>
+  <td><b>Location &amp; Transportation</b></td><td>15</td>
+  <td><input class="score-input" type="number" min="0" max="15" step="0.5" value="0" id="p_LT" oninput="calculate()"></td>
+  <td id="r_LT" style="font-family:'JetBrains Mono',monospace; color:var(--text-muted);">15</td></tr><tr><td><code style="color:var(--primary); font-weight:700;">SS</code></td>
+  <td><b>Sustainable Sites</b></td><td>11</td>
+  <td><input class="score-input" type="number" min="0" max="11" step="0.5" value="0" id="p_SS" oninput="calculate()"></td>
+  <td id="r_SS" style="font-family:'JetBrains Mono',monospace; color:var(--text-muted);">11</td></tr><tr><td><code style="color:var(--primary); font-weight:700;">WE</code></td>
+  <td><b>Water Efficiency</b></td><td>9</td>
+  <td><input class="score-input" type="number" min="0" max="9" step="0.5" value="0" id="p_WE" oninput="calculate()"></td>
+  <td id="r_WE" style="font-family:'JetBrains Mono',monospace; color:var(--text-muted);">9</td></tr><tr><td><code style="color:var(--primary); font-weight:700;">EA</code></td>
+  <td><b>Energy &amp; Atmosphere</b></td><td>33</td>
+  <td><input class="score-input" type="number" min="0" max="33" step="0.5" value="0" id="p_EA" oninput="calculate()"></td>
+  <td id="r_EA" style="font-family:'JetBrains Mono',monospace; color:var(--text-muted);">33</td></tr><tr><td><code style="color:var(--primary); font-weight:700;">MR</code></td>
+  <td><b>Materials &amp; Resources</b></td><td>18</td>
+  <td><input class="score-input" type="number" min="0" max="18" step="0.5" value="0" id="p_MR" oninput="calculate()"></td>
+  <td id="r_MR" style="font-family:'JetBrains Mono',monospace; color:var(--text-muted);">18</td></tr><tr><td><code style="color:var(--primary); font-weight:700;">EQ</code></td>
+  <td><b>Indoor Environmental Quality</b></td><td>13</td>
+  <td><input class="score-input" type="number" min="0" max="13" step="0.5" value="0" id="p_EQ" oninput="calculate()"></td>
+  <td id="r_EQ" style="font-family:'JetBrains Mono',monospace; color:var(--text-muted);">13</td></tr><tr><td><code style="color:var(--primary); font-weight:700;">PR</code></td>
+  <td><b>Project Priorities</b></td><td>10</td>
+  <td><input class="score-input" type="number" min="0" max="10" step="0.5" value="0" id="p_PR" oninput="calculate()"></td>
+  <td id="r_PR" style="font-family:'JetBrains Mono',monospace; color:var(--text-muted);">10</td></tr></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2><span>03</span> Prerequisites &amp; Platinum Requirements</h2>
+    <p style="color: var(--text-muted); font-size: 13px; margin-top: -12px; margin-bottom: 16px;">
+      Prerequisites and MPRs are mandatory checks required prior to final certification review.
+    </p>
+    <div id="checks" bis_skin_checked="1"><div bis_skin_checked="1"><label><input type="checkbox" id="Prerequisites" onchange="calculate()"> All applicable LEED prerequisites satisfied</label></div><div bis_skin_checked="1"><label><input type="checkbox" id="MPR" onchange="calculate()"> Minimum program requirements (MPRs) satisfied</label></div><div bis_skin_checked="1"><label><input type="checkbox" id="platinumCarbon" onchange="calculate()"> Platinum: Carbon assessment &amp; reduction criteria met</label></div><div bis_skin_checked="1"><label><input type="checkbox" id="platinumEnergy" onchange="calculate()"> Platinum: High-performance energy threshold met</label></div><div bis_skin_checked="1"><label><input type="checkbox" id="platinumWater" onchange="calculate()"> Platinum: Water-performance metrics met</label></div><div bis_skin_checked="1"><label><input type="checkbox" id="platinumRenewable" onchange="calculate()"> Platinum: Renewable energy provision met</label></div><div bis_skin_checked="1"><label><input type="checkbox" id="platinumCommissioning" onchange="calculate()"> Platinum: Enhanced commissioning requirement met</label></div></div>
+  </section>
+
+  <section class="card">
+    <h2><span>04</span> Live Assessment</h2>
+    <div class="grid" style="align-items: center;" bis_skin_checked="1">
+      <div bis_skin_checked="1">
+        <label>Total LEED Score</label>
+        <div class="bigscore" id="score" bis_skin_checked="1">0 / 110</div>
+        <div class="progress" bis_skin_checked="1"><div id="bar" style="width:0%" bis_skin_checked="1"></div></div>
+      </div>
+      <div bis_skin_checked="1">
+        <label>Certification Level</label>
+        <div id="level" class="badge none" style="margin-top: 4px; margin-bottom: 8px;" bis_skin_checked="1">Not Certified</div>
+        <p style="color: var(--text-muted); font-size: 13px; margin: 0;" id="levelText"></p>
+      </div>
+      <div bis_skin_checked="1">
+        <label>Green-Building Status</label>
+        <div id="green" class="badge none" style="margin-top: 4px; margin-bottom: 8px;" bis_skin_checked="1">Not Qualified</div>
+        <p style="color: var(--text-muted); font-size: 13px; margin: 0;" id="greenText">Fails to meet minimum point or prerequisite constraints.</p>
+      </div>
+    </div>
+    <div id="resultStatus" class="status red" style="margin-top: 24px;" bis_skin_checked="1"><b>Assessment Summary:</b> Certification cannot be concluded because required prerequisites or MPRs are unchecked.</div>
+  </section>
+
+  <section class="card">
+    <h2><span>05</span> Category Breakdown</h2>
+    <div id="breakdown" bis_skin_checked="1">
+    <div class="breakdown-card" bis_skin_checked="1">
+      <div class="breakdown-header" bis_skin_checked="1">
+        <span>IP —Integrative Process, Planning &amp; Assessments</span>
+        <span>0 /1</span>
+      </div>
+      <div class="progress" bis_skin_checked="1"><div style="width:0%" bis_skin_checked="1"></div></div>
+    </div>
+  
+    <div class="breakdown-card" bis_skin_checked="1">
+      <div class="breakdown-header" bis_skin_checked="1">
+        <span>LT —Location &amp; Transportation</span>
+        <span>0 /15</span>
+      </div>
+      <div class="progress" bis_skin_checked="1"><div style="width:0%" bis_skin_checked="1"></div></div>
+    </div>
+  
+    <div class="breakdown-card" bis_skin_checked="1">
+      <div class="breakdown-header" bis_skin_checked="1">
+        <span>SS —Sustainable Sites</span>
+        <span>0 /11</span>
+      </div>
+      <div class="progress" bis_skin_checked="1"><div style="width:0%" bis_skin_checked="1"></div></div>
+    </div>
+  
+    <div class="breakdown-card" bis_skin_checked="1">
+      <div class="breakdown-header" bis_skin_checked="1">
+        <span>WE —Water Efficiency</span>
+        <span>0 /9</span>
+      </div>
+      <div class="progress" bis_skin_checked="1"><div style="width:0%" bis_skin_checked="1"></div></div>
+    </div>
+  
+    <div class="breakdown-card" bis_skin_checked="1">
+      <div class="breakdown-header" bis_skin_checked="1">
+        <span>EA —Energy &amp; Atmosphere</span>
+        <span>0 /33</span>
+      </div>
+      <div class="progress" bis_skin_checked="1"><div style="width:0%" bis_skin_checked="1"></div></div>
+    </div>
+  
+    <div class="breakdown-card" bis_skin_checked="1">
+      <div class="breakdown-header" bis_skin_checked="1">
+        <span>MR —Materials &amp; Resources</span>
+        <span>0 /18</span>
+      </div>
+      <div class="progress" bis_skin_checked="1"><div style="width:0%" bis_skin_checked="1"></div></div>
+    </div>
+  
+    <div class="breakdown-card" bis_skin_checked="1">
+      <div class="breakdown-header" bis_skin_checked="1">
+        <span>EQ —Indoor Environmental Quality</span>
+        <span>0 /13</span>
+      </div>
+      <div class="progress" bis_skin_checked="1"><div style="width:0%" bis_skin_checked="1"></div></div>
+    </div>
+  
+    <div class="breakdown-card" bis_skin_checked="1">
+      <div class="breakdown-header" bis_skin_checked="1">
+        <span>PR —Project Priorities</span>
+        <span>0 /10</span>
+      </div>
+      <div class="progress" bis_skin_checked="1"><div style="width:0%" bis_skin_checked="1"></div></div>
+    </div>
+  </div>
+  </section>
+
+  <section class="card">
+    <h2><span>06</span> Actions</h2>
+    <div class="actions" bis_skin_checked="1">
+      <button class="btn primary" onclick="calculate()">Recalculate Score</button>
+      <button class="btn secondary" onclick="resetApp()">Reset Form</button>
+      <button class="btn secondary" onclick="downloadReport()">Download Report (.txt)</button>
+    </div>
+  </section>
+
+  <div class="footer" bis_skin_checked="1">
+    <b>Disclaimer:</b> This calculator is built for educational simulation under LEED v5 criteria. Official certification requires third-party review and verification through GBCI. Certification thresholds: Certified 40–49, Silver 50–59, Gold 60–79, Platinum 80+.
+  </div>
+</main>
+
+<script>
+const categories=[
+  {code:"IP",name:"Integrative Process, Planning & Assessments",max:1},
+  {code:"LT",name:"Location & Transportation",max:15},
+  {code:"SS",name:"Sustainable Sites",max:11},
+  {code:"WE",name:"Water Efficiency",max:9},
+  {code:"EA",name:"Energy & Atmosphere",max:33},
+  {code:"MR",name:"Materials & Resources",max:18},
+  {code:"EQ",name:"Indoor Environmental Quality",max:13},
+  {code:"PR",name:"Project Priorities",max:10}
+];
+
+const checks=[
+  ["Prerequisites","All applicable LEED prerequisites satisfied"],
+  ["MPR","Minimum program requirements (MPRs) satisfied"],
+  ["platinumCarbon","Platinum: Carbon assessment & reduction criteria met"],
+  ["platinumEnergy","Platinum: High-performance energy threshold met"],
+  ["platinumWater","Platinum: Water-performance metrics met"],
+  ["platinumRenewable","Platinum: Renewable energy provision met"],
+  ["platinumCommissioning","Platinum: Enhanced commissioning requirement met"]
+];
+
+const catBox=document.getElementById("categories");
+categories.forEach(c=>{
+  const tr=document.createElement("tr");
+  tr.innerHTML=`<td><code style="color:var(--primary); font-weight:700;">${c.code}</code></td>
+  <td><b>${c.name}</b></td><td>${c.max}</td>
+  <td><input class="score-input" type="number" min="0" max="${c.max}" step="0.5" value="0" id="p_${c.code}" oninput="calculate()"></td>
+  <td id="r_${c.code}" style="font-family:'JetBrains Mono',monospace; color:var(--text-muted);">${c.max}</td>`;
+  catBox.appendChild(tr);
+});
+
+const checksBox=document.getElementById("checks");
+checks.forEach(([id,label])=>{
+  const div=document.createElement("div");
+  div.innerHTML=`<label><input type="checkbox" id="${id}" onchange="calculate()"> ${label}</label>`;
+  checksBox.appendChild(div);
+});
+
+function getScore(){
+  let total=0;
+  const values={};
+  categories.forEach(c=>{
+    let v=parseFloat(document.getElementById("p_"+c.code).value)||0;
+    if(v<0)v=0; if(v>c.max)v=c.max;
+    document.getElementById("p_"+c.code).value=v;
+    values[c.code]=v; total+=v;
+    document.getElementById("r_"+c.code).textContent=(c.max-v).toFixed(1).replace(".0","");
+  });
+  return {total,values};
+}
+
+function prerequisitesOK(){
+  return document.getElementById("Prerequisites").checked && document.getElementById("MPR").checked;
+}
+
+function platinumOK(){
+  return ["platinumCarbon","platinumEnergy","platinumWater","platinumRenewable","platinumCommissioning"].every(id=>document.getElementById(id).checked);
+}
+
+function calculate(){
+  const {total,values}=getScore();
+  document.getElementById("score").textContent=`${total.toFixed(1).replace(".0","")} / 110`;
+  document.getElementById("bar").style.width=Math.min(total/110*100,100)+"%";
+  
+  let level="Not Certified", cls="none", text="";
+  if(!prerequisitesOK()){
+    text="Certification cannot be concluded because required prerequisites or MPRs are unchecked.";
+  } else if(total>=80){
+    if(platinumOK()){
+      level="Platinum"; cls="platinum"; text="Achieved 80+ points and all Platinum-specific criteria are satisfied.";
+    } else {
+      level="Gold*"; cls="gold"; text="Achieved 80+ points, but missing one or more Platinum-specific requirements.";
+    }
+  } else if(total>=60){level="Gold"; cls="gold"; text="Meets Gold tier criteria (60–79 points) with all prerequisites satisfied.";}
+  else if(total>=50){level="Silver"; cls="silver"; text="Meets Silver tier criteria (50–59 points) with all prerequisites satisfied.";}
+  else if(total>=40){level="Certified"; cls="certified"; text="Meets Certified tier baseline (40–49 points) with prerequisites satisfied.";}
+  else {text="Score is below the 40-point LEED certification threshold.";}
+
+  const l=document.getElementById("level");
+  l.textContent=level; 
+  l.className="badge "+cls;
+
+  const green=total>=40 && prerequisitesOK();
+  const g=document.getElementById("green");
+  g.textContent=green?"LEED Qualified":"Not Qualified";
+  g.className="badge "+(green?"certified":"none");
+
+  document.getElementById("greenText").textContent=green?
+    "Meets numerical score and prerequisite benchmarks.":
+    "Fails to meet minimum point or prerequisite constraints.";
+
+  const status=document.getElementById("resultStatus");
+  status.className="status "+(green?"green":"red");
+  status.innerHTML=`<b>Assessment Summary:</b> ${text}`;
+
+  const bd=document.getElementById("breakdown");
+  bd.innerHTML=categories.map(c=>`
+    <div class="breakdown-card">
+      <div class="breakdown-header">
+        <span>${c.code} —${c.name}</span>
+        <span>${values[c.code]} /${c.max}</span>
+      </div>
+      <div class="progress"><div style="width:${(values[c.code]/c.max)*100}%"></div></div>
+    </div>
+  `).join("");
+}
+
+function resetApp(){
+  document.getElementById("building").value="";
+  document.getElementById("location").value="";
+  categories.forEach(c=>document.getElementById("p_"+c.code).value=0);
+  checks.forEach(([id])=>document.getElementById(id).checked=false);
+  calculate();
+}
+
+function downloadReport(){
+  const {total}=getScore();
+  const name=document.getElementById("building").value||"Unnamed_Building";
+  const loc=document.getElementById("location").value||"N/A";
+  let lines=[
+    `LEED v5 BUILDING SCORE REPORT`,
+    `==============================`,
+    `Building: ${name}`,
+    `Location: ${loc}`,
+    `Total Score: ${total}/110`,
+    `Certification Level: ${document.getElementById("level").textContent}`,
+    ``,
+    `Category Breakdown:`
+  ];
+  categories.forEach(c=>lines.push(`- ${c.code} (${c.name}): ${document.getElementById("p_"+c.code).value}/${c.max}`));
+  lines.push(``,`Note: Educational simulation report, not an official GBCI certification decision.`);
+  
+  const blob=new Blob([lines.join("\n")],{type:"text/plain"});
+  const a=document.createElement("a");
+  a.href=URL.createObjectURL(blob);
+  a.download=(name.replace(/[^a-z0-9]+/gi,"_")||"leed_report")+"_LEED_v5_Report.txt";
+  a.click();
+}
+
+calculate();
+</script>
+
+<webhighlights-element-registry data-wh-world="vpd1dlwx" elements-count="67"></webhighlights-element-registry><div id="webhighlights-notificationshldjnlbobkdkghfidgoecgmklcemanhm" bis_skin_checked="1"></div><style id="web-highlights-global-style-variables">:root { --wh-slate-50: #f8fafc;--wh-slate-100: #f1f5f9;--wh-slate-200: #e2e8f0;--wh-slate-300: #cbd5e1;--wh-slate-400: #94a3b8;--wh-slate-500: #64748b;--wh-slate-600: #475569;--wh-slate-700: #334155;--wh-slate-800: #1e293b;--wh-slate-900: #0f172a;--wh-slate-950: #020617;--wh-primary-50: rgb(188, 220, 205);--wh-primary-100: rgb(154, 208, 185);--wh-primary-200: rgb(120, 197, 164);--wh-primary-300: rgb(86, 186, 144);--wh-primary-400: rgb(53, 176, 125);--wh-primary-500: rgb(0, 179, 122);--wh-primary-600: hsl(161, 100%, 33%);--wh-primary-700: hsl(161, 100%, 31%);--wh-primary-800: hsl(161, 100%, 29%);--wh-primary-900: hsl(161, 100%, 25%);--wh-primary-950: hsl(161, 100%, 20%);--wh-secondary-50: hsl(218, 22%, 27%);--wh-secondary-100: hsl(218, 22%, 23%);--wh-secondary-200: hsl(218, 22%, 22%);--wh-secondary-300: hsl(218, 22%, 19%);--wh-secondary-400: hsl(218, 22%, 17%);--wh-secondary-500: hsl(218, 22%, 15%);--wh-secondary-600: hsl(218, 22%, 13%);--wh-secondary-700: hsl(218, 22%, 11%);--wh-secondary-800: hsl(218, 22%, 9%);--wh-secondary-900: hsl(218, 22%, 5%);--wh-secondary-950: hsl(218, 22%, 3%);--wh-gray-50: #f9fafb;--wh-gray-100: #f3f4f6;--wh-gray-200: #e5e7eb;--wh-gray-300: #d1d5db;--wh-gray-400: #9ca3af;--wh-gray-500: #6b7280;--wh-gray-600: #4b5563;--wh-gray-700: #374151;--wh-gray-800: #1f2937;--wh-gray-900: #111827;--wh-gray-950: #030712;--wh-zinc-50: #fafafa;--wh-zinc-100: #f4f4f5;--wh-zinc-200: #e4e4e7;--wh-zinc-300: #d4d4d8;--wh-zinc-400: #a1a1aa;--wh-zinc-500: #71717a;--wh-zinc-600: #52525b;--wh-zinc-700: #3f3f46;--wh-zinc-800: #27272a;--wh-zinc-900: #18181b;--wh-zinc-950: #09090b;--wh-neutral-50: #fafafa;--wh-neutral-100: #f5f5f5;--wh-neutral-200: #e5e5e5;--wh-neutral-300: #d4d4d4;--wh-neutral-400: #a3a3a3;--wh-neutral-500: #737373;--wh-neutral-600: #525252;--wh-neutral-700: #404040;--wh-neutral-800: #262626;--wh-neutral-900: #171717;--wh-neutral-950: #0a0a0a;--wh-stone-50: #fafaf9;--wh-stone-100: #f5f5f4;--wh-stone-200: #e7e5e4;--wh-stone-300: #d6d3d1;--wh-stone-400: #a8a29e;--wh-stone-500: #78716c;--wh-stone-600: #57534e;--wh-stone-700: #44403c;--wh-stone-800: #292524;--wh-stone-900: #1c1917;--wh-stone-950: #0c0a09;--wh-red-50: #fef2f2;--wh-red-100: #fee2e2;--wh-red-200: #fecaca;--wh-red-300: #fca5a5;--wh-red-400: #f87171;--wh-red-500: #ef4444;--wh-red-600: #dc2626;--wh-red-700: #b91c1c;--wh-red-800: #991b1b;--wh-red-900: #7f1d1d;--wh-red-950: #450a0a;--wh-orange-50: #fff7ed;--wh-orange-100: #ffedd5;--wh-orange-200: #fed7aa;--wh-orange-300: #fdba74;--wh-orange-400: #fb923c;--wh-orange-500: #f97316;--wh-orange-600: #ea580c;--wh-orange-700: #c2410c;--wh-orange-800: #9a3412;--wh-orange-900: #7c2d12;--wh-orange-950: #431407;--wh-amber-50: #fffbeb;--wh-amber-100: #fef3c7;--wh-amber-200: #fde68a;--wh-amber-300: #fcd34d;--wh-amber-400: #fbbf24;--wh-amber-500: #f59e0b;--wh-amber-600: #d97706;--wh-amber-700: #b45309;--wh-amber-800: #92400e;--wh-amber-900: #78350f;--wh-amber-950: #451a03;--wh-yellow-50: #fefce8;--wh-yellow-100: #fef9c3;--wh-yellow-200: #fef08a;--wh-yellow-300: #fde047;--wh-yellow-400: #facc15;--wh-yellow-500: #eab308;--wh-yellow-600: #ca8a04;--wh-yellow-700: #a16207;--wh-yellow-800: #854d0e;--wh-yellow-900: #713f12;--wh-yellow-950: #422006;--wh-lime-50: #f7fee7;--wh-lime-100: #ecfccb;--wh-lime-200: #d9f99d;--wh-lime-300: #bef264;--wh-lime-400: #a3e635;--wh-lime-500: #84cc16;--wh-lime-600: #65a30d;--wh-lime-700: #4d7c0f;--wh-lime-800: #3f6212;--wh-lime-900: #365314;--wh-lime-950: #1a2e05;--wh-green-50: #f0fdf4;--wh-green-100: #dcfce7;--wh-green-200: #bbf7d0;--wh-green-300: #86efac;--wh-green-400: #4ade80;--wh-green-500: #22c55e;--wh-green-600: #16a34a;--wh-green-700: #15803d;--wh-green-800: #166534;--wh-green-900: #14532d;--wh-green-950: #052e16;--wh-emerald-50: #ecfdf5;--wh-emerald-100: #d1fae5;--wh-emerald-200: #a7f3d0;--wh-emerald-300: #6ee7b7;--wh-emerald-400: #34d399;--wh-emerald-500: #10b981;--wh-emerald-600: #059669;--wh-emerald-700: #047857;--wh-emerald-800: #065f46;--wh-emerald-900: #064e3b;--wh-emerald-950: #022c22;--wh-teal-50: #f0fdfa;--wh-teal-100: #ccfbf1;--wh-teal-200: #99f6e4;--wh-teal-300: #5eead4;--wh-teal-400: #2dd4bf;--wh-teal-500: #14b8a6;--wh-teal-600: #0d9488;--wh-teal-700: #0f766e;--wh-teal-800: #115e59;--wh-teal-900: #134e4a;--wh-teal-950: #042f2e;--wh-cyan-50: #ecfeff;--wh-cyan-100: #cffafe;--wh-cyan-200: #a5f3fc;--wh-cyan-300: #67e8f9;--wh-cyan-400: #22d3ee;--wh-cyan-500: #06b6d4;--wh-cyan-600: #0891b2;--wh-cyan-700: #0e7490;--wh-cyan-800: #155e75;--wh-cyan-900: #164e63;--wh-cyan-950: #083344;--wh-sky-50: #f0f9ff;--wh-sky-100: #e0f2fe;--wh-sky-200: #bae6fd;--wh-sky-300: #7dd3fc;--wh-sky-400: #38bdf8;--wh-sky-500: #0ea5e9;--wh-sky-600: #0284c7;--wh-sky-700: #0369a1;--wh-sky-800: #075985;--wh-sky-900: #0c4a6e;--wh-sky-950: #082f49;--wh-blue-50: #eff6ff;--wh-blue-100: #dbeafe;--wh-blue-200: #bfdbfe;--wh-blue-300: #93c5fd;--wh-blue-400: #60a5fa;--wh-blue-500: #3b82f6;--wh-blue-600: #2563eb;--wh-blue-700: #1d4ed8;--wh-blue-800: #1e40af;--wh-blue-900: #1e3a8a;--wh-blue-950: #172554;--wh-indigo-50: #eef2ff;--wh-indigo-100: #e0e7ff;--wh-indigo-200: #c7d2fe;--wh-indigo-300: #a5b4fc;--wh-indigo-400: #818cf8;--wh-indigo-500: #6366f1;--wh-indigo-600: #4f46e5;--wh-indigo-700: #4338ca;--wh-indigo-800: #3730a3;--wh-indigo-900: #312e81;--wh-indigo-950: #1e1b4b;--wh-violet-50: #f5f3ff;--wh-violet-100: #ede9fe;--wh-violet-200: #ddd6fe;--wh-violet-300: #c4b5fd;--wh-violet-400: #a78bfa;--wh-violet-500: #8b5cf6;--wh-violet-600: #7c3aed;--wh-violet-700: #6d28d9;--wh-violet-800: #5b21b6;--wh-violet-900: #4c1d95;--wh-violet-950: #2e1065;--wh-purple-50: #faf5ff;--wh-purple-100: #f3e8ff;--wh-purple-200: #e9d5ff;--wh-purple-300: #d8b4fe;--wh-purple-400: #c084fc;--wh-purple-500: #a855f7;--wh-purple-600: #9333ea;--wh-purple-700: #7e22ce;--wh-purple-800: #6b21a8;--wh-purple-900: #581c87;--wh-purple-950: #3b0764;--wh-fuchsia-50: #fdf4ff;--wh-fuchsia-100: #fae8ff;--wh-fuchsia-200: #f5d0fe;--wh-fuchsia-300: #f0abfc;--wh-fuchsia-400: #e879f9;--wh-fuchsia-500: #d946ef;--wh-fuchsia-600: #c026d3;--wh-fuchsia-700: #a21caf;--wh-fuchsia-800: #86198f;--wh-fuchsia-900: #701a75;--wh-fuchsia-950: #4a044e;--wh-pink-50: #fdf2f8;--wh-pink-100: #fce7f3;--wh-pink-200: #fbcfe8;--wh-pink-300: #f9a8d4;--wh-pink-400: #f472b6;--wh-pink-500: #ec4899;--wh-pink-600: #db2777;--wh-pink-700: #be185d;--wh-pink-800: #9d174d;--wh-pink-900: #831843;--wh-pink-950: #500724;--wh-rose-50: #fff1f2;--wh-rose-100: #ffe4e6;--wh-rose-200: #fecdd3;--wh-rose-300: #fda4af;--wh-rose-400: #fb7185;--wh-rose-500: #f43f5e;--wh-rose-600: #e11d48;--wh-rose-700: #be123c;--wh-rose-800: #9f1239;--wh-rose-900: #881337;--wh-rose-950: #4c0519;--wh-primary-color: var(--wh-primary-500);--wh-primary-color-hover: #00a16e;--wh-primary-color-transparent: #00aa7424;--wh-primary-color-transparent-light: #00a8730f;--wh-primary-color-transparent-strong: #00a87340;--wh-primary-color-transparent-stronger: hsla(161, 100%, 33%, 0.5);--wh-primary-color-transparent-strongest: hsla(161, 100%, 33%, 0.75);--wh-primary-light: #53e3a6;--wh-primary-dark: #007f4b;--wh-primary-dark-hover: #017444;--wh-primary-shadow: #00b07841;--wh-primary-shadow-2: #00b07870;--wh-primary-border-color: #c8c8c870;--wh-warning-color: #ff5a1f;--wh-warning-color-light: #feecdc;--wh-ai-primary-decimal: 167, 139, 250;--wh-ai-secondary-decimal  : 147, 51, 234;--wh-ai-accent-decimal: 244, 114, 182;--wh-ai-primary: rgba(var(--wh-ai-primary-decimal), 1);--wh-ai-secondary: rgba(var(--wh-ai-secondary-decimal), 1);--wh-ai-accent: rgba(var(--wh-ai-accent-decimal), 1);--secondary-color: #3d4455;--secondary-color-hover: #3a4052;--secondary-color-transparent: #3d44556b;--secondary-light: #4c556d;--secondary-dark: #252934;--secondary-dark-hover: #191b22;--secondary-dark-transparent: #2e2d2d46;--highlight-color: #92ffaa;--error-color: #d62d4c;--error-color-light: #fde8e8;--error-info: #14854e;--success-color: #0e9f6e;--success-color-light: #def7ec;--font-color: #2f3237;--font-color-light: #626364;--font-color-dark: #252525;--wh-font-family: 'SF Pro Display', 'Inter', ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol";--font-family: var(--wh-font-family);--wh-link-color: #1d9bf0;--wh-form-active-color: #3b82f6;--wh-accent-blue: #1f6feb;--BREAKPOINT_XS: 575px;--BREAKPOINT_S: 767px;--BREAKPOINT_M: 991px;--BREAKPOINT_L: 1199px;--BREAKPOINT_XL: 1399px;--BREAKPOINT_XXL: 1699px;--wh-danger-color: var(--wh-red-600);--wh-danger-color-hover: var(--wh-red-700);--wh-font-size: calc(13px * var(--wh-font-size-factor, 1));--wh-blockquote-line-height: 1.3;--wh-aurora-intensity: 0.7;--wh-aurora-image-intensity: 0.2;--wh-font-size-factor: 1;--wh-breakpoint-xs: 575px;--wh-breakpoint-s: 767px;--wh-breakpoint-m: 991px;--wh-breakpoint-l: 1199px;--wh-breakpoint-xl: 1399px;--wh-breakpoint-xxl: 1699px;--wh-font-size-2xs: calc(10px * var(--wh-font-size-factor, 1));--wh-font-size-xs: calc(11px * var(--wh-font-size-factor, 1));--wh-font-size-s: calc(12px * var(--wh-font-size-factor, 1));--wh-font-size-m: calc(13px * var(--wh-font-size-factor, 1));--wh-font-size-l: calc(14px * var(--wh-font-size-factor, 1));--wh-font-size-xl: calc(16px * var(--wh-font-size-factor, 1));--wh-font-size-2xl: calc(18px * var(--wh-font-size-factor, 1));--wh-font-size-3xl: calc(20px * var(--wh-font-size-factor, 1));--wh-font-size-4xl: calc(24px * var(--wh-font-size-factor, 1));--wh-font-size-5xl: calc(30px * var(--wh-font-size-factor, 1));--wh-font-size-6xl: calc(36px * var(--wh-font-size-factor, 1));--wh-spacing-2xs: 2px;--wh-spacing-xs: 4px;--wh-spacing-s: 8px;--wh-spacing-m: 12px;--wh-spacing-l: 16px;--wh-spacing-xl: 24px;--wh-spacing-2xl: 32px;--wh-spacing-3xl: 48px;--wh-spacing-4xl: 64px;--wh-spacing-5xl: 96px;--wh-border-radius-none: 0px;--wh-border-radius-xs: 2px;--wh-border-radius-s: 4px;--wh-border-radius-m: 6px;--wh-border-radius-l: 8px;--wh-border-radius-xl: 12px;--wh-border-radius-2xl: 16px;--wh-border-radius-3xl: 24px;--wh-border-radius-full: 9999px;--wh-font-weight-light: 300;--wh-font-weight-normal: 400;--wh-font-weight-medium: 500;--wh-font-weight-semibold: 600;--wh-font-weight-bold: 700;--wh-font-weight-extrabold: 800;--wh-line-height-tight: 1.25;--wh-line-height-snug: 1.375;--wh-line-height-normal: 1.5;--wh-line-height-relaxed: 1.625;--wh-line-height-loose: 2;--wh-error-text: var(--wh-red-400);--wh-bg-base: var(--wh-secondary-600);--wh-bg-base-hover: var(--wh-secondary-500);--wh-border-base: var(--wh-secondary-200);--wh-border-base-hover: var(--wh-secondary-100);--wh-border-base-strong: var(--wh-secondary-100);--wh-border-base-strong-hover: var(--wh-secondary-50);--wh-bg-base-hover-strong: var(--wh-secondary-300);--wh-bg-back: var(--wh-secondary-700);--wh-bg-back-strong: var(--wh-secondary-800);--wh-bg-back-strong-hover: var(--wh-secondary-900);--wh-bg-back-hover: var(--wh-secondary-600);--wh-bg-back-hover-strong: var(--wh-secondary-800);--wh-border-back: var(--wh-secondary-100);--wh-border-back-strong: var(--wh-secondary-50);--wh-deck-wash-strength: 0.6;--wh-bg-front: var(--wh-secondary-400);--wh-bg-front-strong: var(--wh-secondary-200);--wh-bg-front-strong-hover: var(--wh-secondary-50);--wh-bg-front-hover: var(--wh-secondary-300);--wh-bg-front-hover-strong: var(--wh-secondary-200);--wh-border-front: hsl(227, 20%, 25%);--wh-border-front-strong: hsl(227, 20%, 35%);--wh-border-front-hover: hsl(227, 20%, 55%);--wh-text-stronger: hsl(0, 0%, 95%);--wh-text-strongest: hsl(0, 0%, 100%);--wh-text-strong: hsl(0, 0%, 90%);--wh-text: hsl(0, 0%, 85%);--wh-text-hover: var(--wh-text-strong);--wh-text-light: hsl(0, 0%, 82%);--wh-text-lighter: hsl(0, 0%, 72%);--wh-text-lightest: hsl(0, 0%, 62%);--wh-border-color: hsla(0, 0%, 100%, 0.15);--wh-border-color-strong: hsla(0, 0%, 100%, 0.25);--wh-note-editor-bg-color: hsl(221, 27%, 17%);--wh-note-editor-bg-color-preview: hsl(221, 27%, 15%);--wh-bg-tags: var(--wh-secondary-300);--wh-bg-tags-hover: var(--wh-secondary-200);--wh-syntax-bg-color: rgba(255, 255, 255, 0.05);--wh-fallback-img-color: var(--wh-secondary-600);--wh-bg-disabled: hsl(220, 22%, 18%);--wh-bg-notification-unread: hsla(161, 100%, 20%, 0.15);--wh-bg-notification-unread-hover: hsla(161, 100%, 20%, 0.05);--wh-subtle-gray: rgb(255, 255, 255, 0.1);--wh-shadow: inset 0 0 0.5px 1px hsla(0, 0%, 100%, 0.1),
+      /* 2. shadow ring 👇 */ 0 0 0 1px hsla(230, 13%, 9%, 0.075),
+      /* 3. multiple soft shadows 👇 */ 0 0.3px 0.4px hsla(230, 13%, 9%, 0.02),
+      0 0.9px 1.5px hsla(230, 13%, 9%, 0.045),
+      0 3.5px 6px hsla(230, 13%, 9%, 0.09);--wh-shadow-primary: var(--wh-primary-500) 0px 0px 0px 1px inset,
+      var(--wh-primary-500) 0px 0px 1px;--wh-skeleton-bg: var(--wh-secondary-300);--wh-skeleton-bg-hover: var(--wh-secondary-200);--wh-skeleton-bg-strong: var(--wh-secondary-200);--wh-skeleton-bg-strong-hover: var(--wh-secondary-100);--wh-shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.3);--wh-shadow-s: 0 1px 3px 0 rgba(0, 0, 0, 0.4), 0 1px 2px -1px rgba(0, 0, 0, 0.4);--wh-shadow-m: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -2px rgba(0, 0, 0, 0.4);--wh-shadow-l: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -4px rgba(0, 0, 0, 0.4);--wh-shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 8px 10px -6px rgba(0, 0, 0, 0.4);--wh-shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.5);--wh-warning-bg: rgba(245, 158, 11, 0.08);--wh-warning-bg-hover: rgba(245, 158, 11, 0.10);--wh-warning-border: rgba(245, 158, 11, 0.2);--wh-warning-text: #f59e0b;--wh-aurora-scrim-mid: hsla(218, 22%, 14%, 0.5);--wh-aurora-scrim-strong: hsla(218, 22%, 14%, 0.86);--wh-aurora-scrim-full: hsla(218, 22%, 13%, 0.9);--wh-aurora-title: hsl(0, 0%, 100%);--wh-aurora-text: hsl(0, 0%, 87%);--wh-aurora-text-muted: hsl(218, 10%, 74%);--wh-aurora-tag-bg: hsla(0, 0%, 100%, 0.09);--wh-aurora-tag-bg-hover: hsla(0, 0%, 100%, 0.16);--wh-aurora-tag-border: hsla(0, 0%, 100%, 0.12);--wh-aurora-tag-text: hsl(0, 0%, 92%);--wh-aurora-divider: hsla(0, 0%, 100%, 0.14); }</style><style id="web-highlights-global-styles">
+  webhighlights-sidebar {
+    --wh-font-size: calc(13.5px * var(--wh-font-size-factor, 1));
+  }
+
+  body.web-highlights-animate {
+    transition: all 300ms linear;
+    transition-property: margin-left, margin-right;
+  }
+
+  body.web-highlights-open {
+    margin-left: 400px !important;
+  }
+
+  web-highlight.webhighlights-highlight {
+    background-color: #92ffaa;
+    cursor: pointer;
+    visibility: visible !important;
+  }
+
+  web-highlight.webhighlights-highlight.webhighlight-with-tags,
+  web-highlight.webhighlights-highlight.webhighlight-with-notes {
+    border-bottom: 2.8px solid gray;
+    border-radius: 0px;
+  }
+
+  web-highlight > *:not(webhighlights-popup-toolbox) {
+    background-color: #92ffaa;
+  }
+
+  webhighlights-popup-toolbox.contains-highlight {
+    transform: translate(-63px, -10px);
+    position: fixed;
+  }
+</style><webhighlights-popup-toolbox data-wh-world="vpd1dlwx"><template shadowrootmode="open"><!----><!--?--></template></webhighlights-popup-toolbox><webhighlights-marker data-wh-world="vpd1dlwx"><template shadowrootmode="open"><!---->
+      <!--?lit$041088048$-->
+      <!--?lit$041088048$-->
+      <!--?lit$041088048$-->
+    </template></webhighlights-marker><div id="give-freely-root-hldjnlbobkdkghfidgoecgmklcemanhm" class="give-freely-root" data-extension-id="hldjnlbobkdkghfidgoecgmklcemanhm" data-extension-name="Web Highlights: PDF &amp; Web Highlighter + Notes &amp; AI Summary" bis_skin_checked="1" style="display: block;"><template shadowrootmode="open"><style>
+  :host {
+    all: initial;
+  }
+
+  .gf-scroll-remove::-webkit-scrollbar {
+    border-radius-bottom-right: 15px;
+  }
+
+  button {
+    cursor: pointer;
+    transition: transform 0.1s ease;
+  }
+
+  button:active {
+    transform: scale(0.98);
+  }
+
+  .give-freely-close-button:hover {
+    opacity: 0.7;
+  }
+
+  input[type="radio"] {
+    margin-right: 8px;
+  }
+
+  hr {
+    border: none;
+    border-top: 1px solid #e5e5e5;
+    margin: 1em 0;
+  }
+
+  dialog::backdrop  {
+    background-color: rgba(180, 180, 180, 0.6);
+  }
+
+  dialog.backdrop-hidden::backdrop  {
+    background-color: transparent;
+  }
+</style><div><div class="gf-app"></div></div></template></div></body><webhighlights-sidebar data-wh-world="vpd1dlwx" alignment="left" sidebar-width="400"><template shadowrootmode="open"><!---->
+      <!--?lit$041088048$-->
+            <webhighlights-main-component part="main-component" data-wh-world="vpd1dlwx" data-testid="webhighlights-sidebar-MAIN_COMPONENT" style="left: 0px; right: unset;"><template shadowrootmode="open"><!---->
+      <webhighlights-popover data-wh-world="vpd1dlwx" data-testid="webhighlights-main-component-POPOVER"><template shadowrootmode="open"><!----><!--?--></template>
+        <!--?lit$041088048$--><!--?-->
+      </webhighlights-popover>
+
+      <!-- Button to toggle side-bar. Hidden on mobile reader where FAB takes over -->
+      <!--?lit$041088048$--><!--?-->
+      <!--?lit$041088048$-->
+    </template></webhighlights-main-component>
+          
+      <!--?lit$041088048$--><!--?-->
+    </template></webhighlights-sidebar></html>
