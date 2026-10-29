@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #fafbfd;
+  --foreground: #1e232a;
+}
+
+body {
+  color: var(--foreground);
+  background-color: var(--background);
+  font-family: var(--font-poppins), var(--font-geist-sans), system-ui, sans-serif;
+  min-height: 100vh;
+}
+
+/* Ambient Modern Background Gradient Mesh */
+.ambient-gradient-mesh {
+  background-color: #fafbfd;
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(184, 228, 215, 0.35) 0px, transparent 50%),
+    radial-gradient(at 100% 0%, rgba(219, 234, 254, 0.45) 0px, transparent 50%),
+    radial-gradient(at 50% 50%, rgba(243, 244, 246, 0.4) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(187, 247, 208, 0.25) 0px, transparent 50%),
+    radial-gradient(at 0% 100%, rgba(224, 231, 255, 0.35) 0px, transparent 50%);
+  background-attachment: fixed;
+}
+
+/* Custom smooth transitions for tactile folder cards */
+.folder-transition {
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Hide scrollbars across all browsers while allowing scroll/drag */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
